@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { LoadingMessage } from "../LoadingMessage";
 import "./TimeDashboard.css";
 
 interface TimeDashboardProps {
@@ -7,7 +8,7 @@ interface TimeDashboardProps {
 };
 
 export const TimeDashboard: FC<TimeDashboardProps> = ({ serverTime, isLoading }) => {
-    if (isLoading) return <div data-testid="loading-message">Loading...</div>
+    if (isLoading) return <LoadingMessage />;
     return (
         <div data-testid="time-dashboard" className="time-db-container">
             Time Dashboard

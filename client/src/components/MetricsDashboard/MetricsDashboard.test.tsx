@@ -4,6 +4,7 @@ import { render } from "@testing-library/react";
 
 interface MetricsDashboardArgs {
     apiMetrics: string | null;
+    isLoading: boolean;
 };
 
 const renderComponent = (appProps: MetricsDashboardArgs) => render(<MetricsDashboard {...appProps} />);
@@ -11,14 +12,16 @@ const renderComponent = (appProps: MetricsDashboardArgs) => render(<MetricsDashb
 describe("<MetricsDashboard />", () => {
     it("should render component without crashing", () => {
         const mockProps = {
-            apiMetrics: ""
+            apiMetrics: "",
+            isLoading: false
         };
         const { getByTestId } = renderComponent(mockProps);
         expect(getByTestId("metrics-dashboard")).toBeInTheDocument();
     });
     it("should render the passed API metrics", () => {
         const mockProps = {
-            apiMetrics: "Some numbers and metrics around the API"
+            apiMetrics: "Some numbers and metrics around the API",
+            isLoading: false
         };
         const { getByTestId } = renderComponent(mockProps);
         expect(getByTestId("metrics-content")).toHaveTextContent(mockProps.apiMetrics);

@@ -10,7 +10,7 @@ const App: FC = () => {
   return (
     <div className="app">
       <TimeDashboard serverTime={epoch.description} isLoading={isLoading} />
-      <MetricsDashboard apiMetrics={apiMetrics} />
+      <MetricsDashboard apiMetrics={apiMetrics} isLoading={isLoading}/>
     </div>
   );
 }
