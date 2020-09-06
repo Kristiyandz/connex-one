@@ -3,7 +3,7 @@ import { TimeDashboard } from ".";
 import { render } from "@testing-library/react";
 
 interface TimeDashboardArgs {
-    serverTime: string;
+    serverTime: number;
     isLoading: boolean;
 };
 
@@ -12,7 +12,7 @@ const renderComponent = (appProps: TimeDashboardArgs) => render(<TimeDashboard {
 describe("<TimeDashbaord />", () => {
     it("should render component without crashing", () => {
         const mockProps = {
-            serverTime: '',
+            serverTime: 0,
             isLoading: false
         };
         const { getByTestId } = renderComponent(mockProps);
@@ -20,7 +20,7 @@ describe("<TimeDashbaord />", () => {
     });
     it("should render loading message when fetching the data", () => {
         const mockProps = {
-            serverTime: '',
+            serverTime: 0,
             isLoading: true
         };
         const { getByTestId } = renderComponent(mockProps);
@@ -28,7 +28,7 @@ describe("<TimeDashbaord />", () => {
     });
     it("should render current server time when loading has finished", () => {
         const mockProps = {
-            serverTime: '',
+            serverTime: 0,
             isLoading: false
         };
         const { getByTestId } = renderComponent(mockProps);
