@@ -1,5 +1,5 @@
 import React from "react";
-import { TimeDashboard } from "./TimeDashbaord";
+import { TimeDashboard } from ".";
 import { render } from "@testing-library/react";
 
 const renderComponent = () => render(<TimeDashboard />);

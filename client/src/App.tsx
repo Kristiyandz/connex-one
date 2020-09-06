@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { TimeDashboard } from "./components/TimeDashboard";
+import { MetricsDashboard } from "./components/MetricsDashboard";
+import { useInitialData } from "./hooks/getInitialData";
+import "./App.css";
 
-function App() {
+const App: FC = () => {
+  const [currentServerTime, apiMetrics, hasError] = useInitialData();
   return (
-    <div className="App">
+    <div className="app">
+      <TimeDashboard />
+      <MetricsDashboard />
     </div>
   );
 }
