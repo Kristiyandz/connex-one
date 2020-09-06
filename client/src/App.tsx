@@ -5,10 +5,12 @@ import { useInitialData } from "./hooks/getInitialData";
 import "./App.css";
 
 const App: FC = () => {
-  const [currentServerTime, apiMetrics, hasError] = useInitialData();
+  const [currentServerTime, apiMetrics, hasError, isLoading] = useInitialData();
+  const { properties: { epoch } } = currentServerTime;
+  console.log(epoch.description, 'the description')
   return (
     <div className="app">
-      <TimeDashboard />
+      <TimeDashboard serverTime={epoch.description} isLoading={isLoading}/>
       <MetricsDashboard />
     </div>
   );
