@@ -1,4 +1,4 @@
-import  {  useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
 interface TimeResponse {
@@ -12,7 +12,7 @@ interface TimeResponse {
     type: string;
 }
 
-export const useInitialData = (): [TimeResponse, string | null, boolean, boolean] => {
+export const useServerTime = (): [TimeResponse, boolean, boolean] => {
     const [currentServerTime, setCurrentServerTime] = useState<TimeResponse>({
         properties: {
             epoch: {
@@ -23,10 +23,9 @@ export const useInitialData = (): [TimeResponse, string | null, boolean, boolean
         required: [""],
         type: "",
     });
-    const [apiMetrics, setApiMetrics] = useState<string | null>(null);
-    const [hasError, setHasError] = useState<boolean>(false);
-    const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [hasLoaded, setHasLoaded] = useState<boolean>(false);
+    const [hasSTError, setHasSTError] = useState<boolean>(false);
+    const [isSTimeLoading, setIsSTimeLoading] = useState<boolean>(false);
+    const [hasSTLoaded, setHasSTLoaded] = useState<boolean>(false);
 
     const fetchData = async () => {
         const options = {
@@ -35,18 +34,16 @@ export const useInitialData = (): [TimeResponse, string | null, boolean, boolean
             }
         };
         try {
-            setIsLoading(true);
+            setIsSTimeLoading(true);
             const time = await (await axios.get('http://localhost:3000/time', options)).data;
-            const metrics = await (await axios.get('http://localhost:3000/metrics', options)).data;
 
             setCurrentServerTime(time);
-            setApiMetrics(metrics);
-            setIsLoading(false);
-            setHasLoaded(true);
+            setIsSTimeLoading(false);
+            setHasSTLoaded(true);
         } catch (error) {
             console.log(error);
-            setHasError(true);
-            setIsLoading(false);
+            setHasSTError(true);
+            setIsSTimeLoading(false);
         }
     };
 
@@ -59,7 +56,7 @@ export const useInitialData = (): [TimeResponse, string | null, boolean, boolean
             fetchData()
         }, 30000)
         return () => clearInterval(interval);
-    }, [hasLoaded])
+    }, [hasSTLoaded])
 
-    return [currentServerTime, apiMetrics, hasError, isLoading];
+    return [currentServerTime, hasSTError, isSTimeLoading];
 };

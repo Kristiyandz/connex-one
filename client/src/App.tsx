@@ -1,19 +1,19 @@
 import React, { FC } from 'react';
 import { TimeDashboard } from "./components/TimeDashboard";
 import { MetricsDashboard } from "./components/MetricsDashboard";
-import { useInitialData } from "./hooks/getInitialData";
+import { useServerTime, useMetrics } from "./hooks";
 import "./App.css";
 
 const App: FC = () => {
-  const [currentServerTime, apiMetrics, hasError, isLoading] = useInitialData();
+  const [currentServerTime, hasSTError, isSTimeLoading] = useServerTime();
+  const [apiMetrics, hasMetricsError, isMetricsLoading] = useMetrics();
+
   const { properties: { epoch } } = currentServerTime;
-  if(hasError) {
-    return <div>An error has occured fteching server time & metrics</div>
-  };
+
   return (
     <div className="app">
-      <TimeDashboard serverTime={epoch.description} isLoading={isLoading} />
-      <MetricsDashboard apiMetrics={apiMetrics} isLoading={isLoading}/>
+      <TimeDashboard serverTime={epoch.description} isLoading={isSTimeLoading} hasError={hasSTError} />
+      <MetricsDashboard apiMetrics={apiMetrics} isLoading={isMetricsLoading} hasError={hasMetricsError} />
     </div>
   );
 }

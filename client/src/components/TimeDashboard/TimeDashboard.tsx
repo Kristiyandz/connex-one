@@ -1,13 +1,15 @@
 import React, { FC, useState, useEffect } from "react";
 import { LoadingMessage } from "../LoadingMessage";
+import { ErrorMessage } from "../ErrorMessage";
 import "./TimeDashboard.css";
 
 interface TimeDashboardProps {
     serverTime: number;
     isLoading: boolean;
+    hasError: boolean;
 };
 
-export const TimeDashboard: FC<TimeDashboardProps> = ({ serverTime, isLoading }) => {
+export const TimeDashboard: FC<TimeDashboardProps> = ({ serverTime, isLoading, hasError }) => {
 
     const [timeDiff, setTimeDifference] = useState(0);
 
@@ -27,6 +29,8 @@ export const TimeDashboard: FC<TimeDashboardProps> = ({ serverTime, isLoading })
     });
 
     if (isLoading) return <LoadingMessage />;
+    if (hasError) return <ErrorMessage service="time" />;
+    
     return (
         <div data-testid="time-dashboard" className="time-db-container">
             <h1>Time Dashboard</h1>
