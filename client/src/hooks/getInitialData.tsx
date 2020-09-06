@@ -1,10 +1,10 @@
-import React, { FC, useState, useEffect } from "react";
-import axios, { AxiosResponse } from "axios";
+import  {  useState, useEffect } from "react";
+import axios from "axios";
 
 interface TimeResponse {
     properties: {
         epoch: {
-            description: string;
+            description: number;
             type: string;
         }
     },
@@ -16,7 +16,7 @@ export const useInitialData = (): [TimeResponse, string | null, boolean, boolean
     const [currentServerTime, setCurrentServerTime] = useState<TimeResponse>({
         properties: {
             epoch: {
-                description: "",
+                description: 0,
                 type: "",
             }
         },

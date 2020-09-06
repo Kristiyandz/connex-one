@@ -7,6 +7,9 @@ import "./App.css";
 const App: FC = () => {
   const [currentServerTime, apiMetrics, hasError, isLoading] = useInitialData();
   const { properties: { epoch } } = currentServerTime;
+  if(hasError) {
+    return <div>An error has occured fteching server time & metrics</div>
+  };
   return (
     <div className="app">
       <TimeDashboard serverTime={epoch.description} isLoading={isLoading} />

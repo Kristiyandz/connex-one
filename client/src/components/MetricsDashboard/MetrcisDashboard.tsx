@@ -11,7 +11,7 @@ export const MetricsDashboard: FC<MetricsDashboardProps> = ({ apiMetrics, isLoad
     if (isLoading) return <LoadingMessage />
     return (
         <div data-testid="metrics-dashboard" className="metrics-db-container">
-            Metrics dashboard
+            <h1>Metrics dashboard</h1>
             <pre>
                 <code data-testid="metrics-content">{apiMetrics}</code>
             </pre>
