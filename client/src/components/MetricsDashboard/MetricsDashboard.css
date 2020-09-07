@@ -1,5 +1,6 @@
 .metrics-db-container {
     width: 50%;
-    height: 100%;
-    border: 3px solid red;
+    height: 80vh;
+    overflow-y: scroll;
+    background-color: rgb(241, 239, 235);
 }

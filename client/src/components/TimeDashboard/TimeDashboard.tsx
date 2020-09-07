@@ -30,12 +30,14 @@ export const TimeDashboard: FC<TimeDashboardProps> = ({ serverTime, isLoading, h
 
     if (isLoading) return <LoadingMessage />;
     if (hasError) return <ErrorMessage service="time" />;
-    
+
     return (
         <div data-testid="time-dashboard" className="time-db-container">
-            <h1>Time Dashboard</h1>
-            <div>Most recent server time in epoch seconds<strong>{serverTime}</strong></div>
+            <div className="time-db-content">
+                <h1>Time Dashboard</h1>
+                <div>Most recent server time in epoch seconds <strong>{serverTime}</strong></div>
             Time difference since most recent server time <strong>{`00:00:${formatSeconds(timeDiff)}`}</strong>
+            </div>
         </div>
     );
 };
